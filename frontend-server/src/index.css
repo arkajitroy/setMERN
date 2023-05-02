@@ -6,8 +6,22 @@
   font-family: "Poppins", sans-serif;
 }
 
+body {
+  background-color: #f1f1f1;
+}
+
 .primary-btn {
   color: white;
   background-color: blue;
   border-radius: 10px;
 }
+
+/*
+
+COLOR-PALLET
+
+dark-blue : 060047
+red : B3005E
+pink: E90064
+
+*/
