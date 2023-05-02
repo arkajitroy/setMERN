@@ -1,0 +1,61 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f1f1f1;
+}
+
+.login-page-headline {
+  color: #b3005e;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #b3005e;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #880a4d;
+}
+
+.create-account-link {
+  color: #b3005e;
+  font-weight: 600;
+  cursor: pointer;
+}
