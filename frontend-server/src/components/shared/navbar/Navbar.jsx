@@ -1,9 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "./navbar.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLoginButtonRedirect = () => {
+    navigate("/auth/login");
+  };
+
   return (
     <nav className="navbar">
       <ul className="navbar-list">
@@ -28,7 +34,9 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="navbar-login">
-        <button className="navbar-button">Log In</button>
+        <button className="navbar-button" onClick={handleLoginButtonRedirect}>
+          Log In
+        </button>
       </div>
     </nav>
   );

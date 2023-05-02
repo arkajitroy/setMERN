@@ -28,6 +28,10 @@ nav {
   align-items: center;
 }
 
+.registration-page-headline {
+  color: #b3005e;
+}
+
 .navbar-button {
   width: 100px;
   background-color: transparent;
