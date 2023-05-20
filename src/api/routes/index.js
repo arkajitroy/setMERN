@@ -2,6 +2,6 @@ const express = require("express");
 const app = express();
 
 // routes
-app.use("/user", require("./users/user.routes"));
+app.use("/auth", require("./auth/auth.routes"));
 
 module.exports = app;

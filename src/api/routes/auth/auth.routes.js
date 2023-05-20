@@ -8,14 +8,11 @@ const {
 } = require("../../controllers/users/users.controller");
 const { authMiddleware } = require("../../middlewares/auth.middleware");
 const validator = require("../../middlewares/validator.middleware");
-const validators = require("../../middlewares/validators/index.js");
-
-// required validator
-const { registerUserValidator } = validators.auth;
+const authValidators = require("../../middlewares/validators/auth/registerUser.validator.js");
 
 // routes
 router.get("/", getAllUsers);
-router.post("/", validator(registerUserValidator), registerUser);
+router.post("/register", validator(authValidators), registerUser);
 router.post("/login", loginUser);
 router.get("/profile", authMiddleware, profile);
 
