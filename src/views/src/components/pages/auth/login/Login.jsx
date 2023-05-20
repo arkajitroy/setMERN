@@ -1,30 +1,38 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./login.css";
+import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleRegistrationPageRedirect = () => {
     navigate("/auth/register");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(`Email: ${email}, Password: ${password}`);
-    // Submit login data to backend API here
-  };
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      axios
+        .post("http://localhost:4000/api/auth/login", formData)
+        .then((response) => console.log(response))
+        .then(() => navigate("/"))
+        .catch((error) => console.log(error));
+    },
+    [formData, navigate]
+  );
 
   return (
     <div className="login-page">
@@ -35,8 +43,8 @@ const Login = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={handleEmailChange}
+            name="email"
+            onChange={handleChange}
             required
           />
         </div>
@@ -45,8 +53,8 @@ const Login = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={handlePasswordChange}
+            name="password"
+            onChange={handleChange}
             required
           />
         </div>

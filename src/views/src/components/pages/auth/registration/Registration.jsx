@@ -1,35 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./registration.css";
 
 const Registration = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(
-      `Username: ${username}, Email: ${email}, Password: ${password}`
-    );
-    // Submit registration data to backend API here
-  };
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      axios
+        .post("http://localhost:4000/api/auth/register", formData)
+        .then((response) => console.log(response))
+        .then(() => navigate("/auth/success"))
+        .catch((error) => console.log(error));
+    },
+    [formData, navigate]
+  );
 
   return (
     <div className="registration-page">
@@ -40,8 +39,8 @@ const Registration = () => {
           <input
             type="text"
             id="username"
-            value={username}
-            onChange={handleUsernameChange}
+            name="name"
+            onChange={handleChange}
             required
           />
         </div>
@@ -50,8 +49,8 @@ const Registration = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={handleEmailChange}
+            name="email"
+            onChange={handleChange}
             required
           />
         </div>
@@ -60,18 +59,8 @@ const Registration = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirm-password">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
+            name="password"
+            onChange={handleChange}
             required
           />
         </div>

@@ -16,7 +16,8 @@ const Navbar = () => {
   return (
     <>
       {location.pathname === "/auth/login" ||
-      location.pathname === "/auth/register" ? null : (
+      location.pathname === "/auth/register" ||
+      location.pathname === "/auth/success" ? null : (
         <nav className="navbar">
           <ul className="navbar-list">
             <li>
