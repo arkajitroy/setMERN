@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-const getMe = asyncHandler(async (req, res) => {
+const profile = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
@@ -78,6 +78,6 @@ const getAllUsers = asyncHandler(async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
-  getMe,
+  profile,
   getAllUsers,
 };
