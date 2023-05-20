@@ -3,15 +3,20 @@ const router = express.Router();
 const {
   registerUser,
   loginUser,
-  getMe,
+  profile,
   getAllUsers,
 } = require("../../controllers/users/users.controller");
 const { authMiddleware } = require("../../middlewares/auth.middleware");
+const validator = require("../../middlewares/validator.middleware");
+const validators = require("../../middlewares/validators/index.js");
+
+// required validator
+const { registerUserValidator } = validators.auth;
 
 // routes
 router.get("/", getAllUsers);
-router.post("/", registerUser);
+router.post("/", validator(registerUserValidator), registerUser);
 router.post("/login", loginUser);
-router.get("/getMe", authMiddleware, getMe);
+router.get("/profile", authMiddleware, profile);
 
 module.exports = router;
