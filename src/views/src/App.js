@@ -7,6 +7,7 @@ import {
   Navbar,
   RegistrationPage,
   LoginPage,
+  SuccessPage,
 } from "./components";
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/auth/register" element={<RegistrationPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/success" element={<SuccessPage />} />
         </Routes>
       </BrowserRouter>
     </div>
