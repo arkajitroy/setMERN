@@ -1,8 +1,9 @@
 {
-  "name": "backend-server",
+  "name": "demo_create_mern_app",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
+  "bin": "./bin/cli.js",
   "scripts": {
     "start": "nodemon src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
