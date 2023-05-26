@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import "./navbar.css";
 
 const Navbar = () => {
+  const [loginStatus, setLoginStatus] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -12,6 +13,17 @@ const Navbar = () => {
   const handleLoginButtonRedirect = () => {
     navigate("/auth/login");
   };
+
+  const handleLogoutButton = () => {
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus) localStorage.setItem("loginStatus", false);
+    location.reload();
+  };
+
+  useEffect(() => {
+    const login_status = localStorage.getItem("loginStatus");
+    if (login_status) setLoginStatus(JSON.parse(loginStatus));
+  }, [loginStatus]);
 
   return (
     <>
@@ -44,13 +56,19 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-          <div className="navbar-login">
-            <button
-              className="navbar-button"
-              onClick={handleLoginButtonRedirect}
-            >
-              Log In
-            </button>
+          <div className="navbar-login-container">
+            {loginStatus === true ? (
+              <span className="navbar-button" onClick={handleLogoutButton}>
+                Sing Out
+              </span>
+            ) : (
+              <span
+                className="navbar-button"
+                onClick={handleLoginButtonRedirect}
+              >
+                Log In
+              </span>
+            )}
           </div>
         </nav>
       )}

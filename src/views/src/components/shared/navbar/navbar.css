@@ -2,9 +2,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #060047;
-  color: #fff;
-  padding: 1rem;
+  padding: 1rem 4rem;
 }
 
 .navbar-list {
@@ -13,35 +11,33 @@ nav {
 }
 
 .navbar-link {
-  color: #fff;
+  color: black;
   text-decoration: none;
-  margin: 0 1rem;
+  margin: 0 2rem;
 }
 
 .navbar-link.active {
-  color: #e90064;
+  color: black;
   font-weight: bold;
 }
 
-.navbar-login {
-  display: flex;
-  align-items: center;
-}
-
-.registration-page-headline {
-  color: #b3005e;
+/* -------------------------------- BUTTON ---------------------------- */
+.navbar-login-container {
+  display: flex !important;
+  align-items: center !important;
 }
 
 .navbar-button {
-  width: 100px;
-  background-color: transparent;
-  border: 1px solid #fff;
-  border-style: dashed;
-  color: #fff;
+  text-align: center;
+  color: black;
   cursor: pointer;
+  border-radius: 10rem;
+  padding: 0.5rem 1.5rem;
 }
 
 .navbar-button:hover {
-  background-color: #b3005e;
-  color: white;
+  color: black;
+  background-color: rgba(110, 110, 110, 0.438);
+  transition: 0.2s all ease-out;
+  font-weight: 600;
 }
