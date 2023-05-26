@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useCallback, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./login.css";
@@ -9,6 +10,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [loginStatus, setLoginStatus] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -28,11 +30,20 @@ const Login = () => {
       axios
         .post("http://localhost:4000/api/auth/login", formData)
         .then((response) => console.log(response))
+        .then(() => {
+          setLoginStatus(true);
+          localStorage.setItem("loginStatus", true);
+        })
         .then(() => navigate("/"))
         .catch((error) => console.log(error));
     },
     [formData, navigate]
   );
+
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus) setLoginStatus(JSON.parse(loginStatus));
+  }, []);
 
   return (
     <div className="login-page">
