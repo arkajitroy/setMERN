@@ -8,7 +8,7 @@
 }
 
 .registration-page-headline {
-  color: #b3005e;
+  color: #404040;
   margin-bottom: 10px;
 }
 
@@ -42,7 +42,7 @@ input {
 button {
   margin-top: 20px;
   padding: 10px;
-  background-color: #b3005e;
+  background-color: #404040;
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -51,5 +51,5 @@ button {
 }
 
 button:hover {
-  background-color: #880a4d;
+  background-color: #252525;
 }

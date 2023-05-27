@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import "./navbar.css";
@@ -14,16 +14,20 @@ const Navbar = () => {
     navigate("/auth/login");
   };
 
+  const getLoginStatusFromLS = useCallback(() => {
+    const login_status = localStorage.getItem("loginStatus");
+    if (login_status) setLoginStatus(JSON.parse(login_status));
+  }, []);
+
   const handleLogoutButton = () => {
     const loginStatus = localStorage.getItem("loginStatus");
-    if (loginStatus) localStorage.setItem("loginStatus", false);
-    location.reload();
+    if (loginStatus) localStorage.setItem("loginStatus", null);
+    window.location.reload();
   };
 
   useEffect(() => {
-    const login_status = localStorage.getItem("loginStatus");
-    if (login_status) setLoginStatus(JSON.parse(loginStatus));
-  }, [loginStatus]);
+    getLoginStatusFromLS();
+  }, [getLoginStatusFromLS]);
 
   return (
     <>
