@@ -1,0 +1,46 @@
+/* This is a sample css file which i am just using for all the component */
+
+/* ------------------- SUCCESS PAGE ------------------ */
+.success-container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-container .success-icon {
+  margin: 10px;
+  width: 10%;
+}
+
+.success-container p {
+  font-size: 20px;
+}
+
+/* ----------------- PAGE LAYOUT STYLINGS ----------------- */
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container .greeting-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.main-container .greeting-container img {
+  height: auto;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.main-container .greeting-container .main-greeeting {
+  font-weight: 700;
+  font-size: 50px;
+}

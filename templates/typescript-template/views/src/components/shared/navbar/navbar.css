@@ -1,0 +1,43 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+}
+
+.navbar-link {
+  color: black;
+  text-decoration: none;
+  margin: 0 2rem;
+}
+
+.navbar-link.active {
+  color: black;
+  font-weight: bold;
+}
+
+/* -------------------------------- BUTTON ---------------------------- */
+.navbar-login-container {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.navbar-button {
+  text-align: center;
+  color: black;
+  cursor: pointer;
+  border-radius: 10rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.navbar-button:hover {
+  color: black;
+  background-color: rgba(110, 110, 110, 0.438);
+  transition: 0.2s all ease-out;
+  font-weight: 600;
+}
