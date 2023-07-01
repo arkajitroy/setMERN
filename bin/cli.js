@@ -5,6 +5,9 @@ const path = require("path");
 const { exec } = require("child_process");
 const readLine = require("readline");
 
+// main-repository
+const repository = `https://github.com/arkajitroy/setMERN.git`;
+
 // assigning the templates
 const templates = [
   { name: "javascript (Js)", directory: "javascript-template" },
@@ -58,7 +61,6 @@ const copyTemplate = (template) => {
 // Clone the template and copy it to the destination directory
 const cloneAndCopyTemplate = (template) => {
   const { directory, destinationPath } = template;
-  const repository = `https://github.com/your-repository.git`;
 
   exec(`git clone ${repository}`, (error, stdout, stderr) => {
     if (error) {
