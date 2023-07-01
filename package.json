@@ -1,5 +1,5 @@
 {
-  "name": "demo_create_mern_app",
+  "name": "mern_cli_demo",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",

@@ -1,80 +1,66 @@
 #!/usr/bin/env node
 
+const readline = require("readline");
 const fs = require("fs");
 const path = require("path");
-const { exec } = require("child_process");
-const readLine = require("readline");
+const { promisify } = require("util");
+const exec = promisify(require("child_process").exec);
 
-// main-repository
-const repository = `https://github.com/arkajitroy/setMERN.git`;
+// constants
+const templateRepoUrl = "https://github.com/arkajitroy/setMERN.git";
+const templatesDir = path.join(__dirname, "templates");
 
-// assigning the templates
+// Create readline interface for user input
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+// templates constants
 const templates = [
-  { name: "javascript (Js)", directory: "javascript-template" },
-  { name: "typescript (Ts)", directory: "typescript-template" },
+  { name: "javascript (Js)", template_dir: "javascript-template" },
+  { name: "typescript (Ts)", template_dir: "typescript-template" },
 ];
 
-// prompt user to choose the template
-const promptUser = () => {
-  const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+console.log("Choose the template of your choice 👇");
+templates.forEach((templates, index) => {
+  console.log(`[choice 0${index + 1}]: ${templates.name}`);
+});
 
-  // showing templates
-  console.log("Choose the template of your choice 👇");
-  templates.forEach((templates, index) => {
-    console.log(`[choice 0${index + 1}]: ${templates.name}`);
-  });
+// Prompt the user to choose a template
+rl.question("Make your choice, Entering the number 👉  ", async (template) => {
+  const templateIndex = parseInt(template) - 1;
+  let template_name;
 
-  rl.question("Make your choice, Entering the number 👉 ", (answer) => {
-    const templateIndex = parseInt(answer) - 1;
-
-    if (templateIndex >= 0 && templateIndex < templates.length) {
-      rl.close();
-      cloneAndCopyTemplate(templates[templateIndex]);
-    } else {
-      console.log("Sorry! But you have chosen a wrong choice");
-      promptUser();
-    }
-  });
-};
-
-// Copy the template to the destination directory
-const copyTemplate = (template) => {
-  const { directory, destinationPath } = template;
-  const templatePath = path.join(__dirname, directory);
-
-  // Create the destination directory if it doesn't exist
-  if (!fs.existsSync(destinationPath)) {
-    fs.mkdirSync(destinationPath, { recursive: true });
+  // Validate the template choice
+  if (templateIndex !== 1 || templateIndex !== 2) {
+    console.log("Sorry! But you have chosen a wrong choice");
+    rl.close();
+    return;
   }
 
-  // Copy files from the template directory to the destination directory
-  fs.readdirSync(templatePath).forEach((file) => {
-    const sourceFilePath = path.join(templatePath, file);
-    const destinationFilePath = path.join(destinationPath, file);
-    fs.copyFileSync(sourceFilePath, destinationFilePath);
-  });
-};
+  if (templateIndex === 1) template_name = "javascript";
+  if (templateIndex === 2) template_name = "typescript";
 
-// Clone the template and copy it to the destination directory
-const cloneAndCopyTemplate = (template) => {
-  const { directory, destinationPath } = template;
+  // Set the template directory path based on the user's choice
+  const templateDir = path.join(templatesDir, `${template_name}-template`);
 
-  exec(`git clone ${repository}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`😥 Oops !! Error cloning the template: ${error}`);
-      return;
-    }
+  try {
+    // Clone the template repository to the working space
+    await cloneTemplate(templateDir);
     console.log("⌛ Hang on buddy !! Cloning the repository");
-    console.log(`Template cloned successfully 💯\n${stdout}`);
+    console.log(`Template cloned successfully 💯\n${templateDir}`);
+    console.log("Here we Go 💯 All set for hacking 🤖");
+  } catch (error) {
+    console.error("Error cloning template:", error);
+  } finally {
+    rl.close();
+  }
+});
 
-    template.directory = path.join(__dirname, directory);
-    copyTemplate(template);
-  });
-
-  console.log("Here we Go 💯 All set for hacking 🤖");
-};
-
-promptUser();
+// Function to clone the template repository
+async function cloneTemplate(destinationDir) {
+  // Clone the repository using git command
+  const command = `git clone ${templateRepoUrl} ${destinationDir}`;
+  await exec(command);
+}
